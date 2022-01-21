@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom'
 import Produto from '../../../models/Produto';
 import { Box, Card, CardActions, CardContent, Button, Typography, CardActionArea, CardMedia, Grid } from '@material-ui/core';
 import './ListaProduto.css';
-import useLocalStorage from 'react-use-localstorage';
 import { useHistory } from 'react-router-dom'
 import { busca } from '../../../service/Service';
 import { useSelector } from 'react-redux';
@@ -62,39 +61,43 @@ function ListaProduto() {
                     alt="Escova"
                   />
                   <CardContent>
-                    <Typography variant="body2" component="p">
-                      Nome: {post.nomeProduto}
+                    <Box className='box-descricao-produto' borderBottom={2}>
+                    <Typography variant="body2" component="p" className='titulo-card-produto'>
+                      {post.nomeProduto}
                     </Typography>
                     <Typography variant="body2" component="p">
-                      Descrição: {post.descricao}
+                      {post.descricao}
                     </Typography>
-                    <Typography variant="body2" component="p">
-                      Preço: R${post.preco}
+                    <Typography variant="body2" component="p" className='texto-preco-produto'>
+                      R${post.preco}
                     </Typography>
-                    <Typography variant="body2" component="p">
-                      Categoria: {post.categoria?.descricao}
+                    </Box>
+                    <Typography variant="body2" component="p" className='texto-categoria-produto'>
+                      Categoria: {post.categoria?.nomeCategoria}
                     </Typography>
                   </CardContent>
                 </CardActionArea>
-                <CardContent>
+
+                <CardContent className='caixa-botoes'>
                   <Box display="flex" justifyContent="center" mb={1.5}>
 
                     <Link to={`/formularioProduto/${post.id}`} className="text-decorator-none" >
                       <Box mx={1}>
-                        <Button variant="contained" className="marginLeft" size='small' color="primary" >
+                        <Button variant="contained" className="botao-atualizar" size='small' color="primary" >
                           atualizar
                         </Button>
                       </Box>
                     </Link>
                     <Link to={`/deletarProduto/${post.id}`} className="text-decorator-none">
                       <Box mx={1}>
-                        <Button variant="contained" size='small' color="secondary">
+                        <Button variant="contained" className="botao-deletar" size='small' color="secondary">
                           deletar
                         </Button>
                       </Box>
                     </Link>
                   </Box>
                 </CardContent>
+
               </Card>
             </Box >
           ))
